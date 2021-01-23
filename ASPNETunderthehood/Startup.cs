@@ -13,8 +13,14 @@ namespace ASPNETunderthehood
 {
     public class Startup
     {
+        readonly string token = "RuslanPr0g";
+
         public void ConfigureServices(IServiceCollection services)
         {
+            if (services is null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -24,7 +30,7 @@ namespace ASPNETunderthehood
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseToken();
+            app.UseToken(token);
 
             app.UseRouting();
 
