@@ -2,6 +2,7 @@ using ASPNETunderthehood.Extentions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -13,7 +14,14 @@ namespace ASPNETunderthehood
 {
     public class Startup
     {
-        readonly string token = "RuslanPr0g";
+        string token;
+
+        public IConfiguration Configuration { get; private set; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -21,6 +29,8 @@ namespace ASPNETunderthehood
             {
                 throw new ArgumentNullException(nameof(services));
             }
+
+            token = Configuration.GetValue<string>("Token");
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
