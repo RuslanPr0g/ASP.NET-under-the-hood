@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPNETunderthehood", "ASPNETunderthehood\ASPNETunderthehood.csproj", "{6A76C7CF-5962-4A20-8ECD-DCD05099BAD2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A76C7CF-5962-4A20-8ECD-DCD05099BAD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A76C7CF-5962-4A20-8ECD-DCD05099BAD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A76C7CF-5962-4A20-8ECD-DCD05099BAD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A76C7CF-5962-4A20-8ECD-DCD05099BAD2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {064CB4D6-F9BF-4572-90F1-CAF0D13463D6}
+	EndGlobalSection
+EndGlobal
