@@ -1,3 +1,4 @@
+using ASPNETunderthehood.Extentions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -22,6 +23,8 @@ namespace ASPNETunderthehood
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseToken();
 
             app.UseRouting();
 
