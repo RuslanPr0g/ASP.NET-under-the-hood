@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\theru\\Desktop\\ASPNETunderthehood\\ASPNETunderthehood\\ASPNETunderthehood.csproj",
+      "projectUniqueName": "C:\\Users\\theru\\Desktop\\ASP.NET-under-the-hood\\ASPNETunderthehood\\ASPNETunderthehood.csproj",
       "projectName": "ASPNETunderthehood",
-      "projectPath": "C:\\Users\\theru\\Desktop\\ASPNETunderthehood\\ASPNETunderthehood\\ASPNETunderthehood.csproj",
+      "projectPath": "C:\\Users\\theru\\Desktop\\ASP.NET-under-the-hood\\ASPNETunderthehood\\ASPNETunderthehood.csproj",
       "packagesPath": "C:\\Users\\theru\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\theru\\Desktop\\ASPNETunderthehood\\ASPNETunderthehood\\obj\\",
+      "outputPath": "C:\\Users\\theru\\Desktop\\ASP.NET-under-the-hood\\ASPNETunderthehood\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\theru\\AppData\\Roaming\\NuGet\\NuGet.Config",
