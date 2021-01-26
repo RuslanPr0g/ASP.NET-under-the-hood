@@ -17,6 +17,7 @@ namespace ASPNETunderthehood.Middlewares
         public async Task InvokeAsync(HttpContext context)
         {
             string path = context.Request.Path.Value.ToLower();
+
             if (path == "/index")
             {
                 await context.Response.WriteAsync("Home Page");
@@ -25,8 +26,12 @@ namespace ASPNETunderthehood.Middlewares
             {
                 await context.Response.WriteAsync("About");
             }
-            else
+            else if (path == "/index.html")
             {
+                // give html file
+            }
+            else
+                    {
                 context.Response.StatusCode = 404;
             }
         }
