@@ -11,7 +11,7 @@ namespace ASPNETunderthehood.Extentions
     {
         public static IApplicationBuilder UseRouting(this IApplicationBuilder builder)
         {
-            builder.UseMiddleware<RoutingMiddleware>();
+            return builder.UseMiddleware<RoutingMiddleware>();
         }
     }
 }
