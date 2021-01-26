@@ -42,7 +42,9 @@ namespace ASPNETunderthehood
 
             app.UseToken(token);
 
-            app.UseRouting();
+            app.UseAuthentication();
+
+            app.UseRoutingMiddleware();
 
             app.UseEndpoints(endpoints =>
             {
