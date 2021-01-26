@@ -46,11 +46,13 @@ namespace ASPNETunderthehood
 
             app.UseRoutingMiddleware();
 
+            app.UseRouting();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    await context.Response.WriteAsync("THIS DOES NOT MAKE SENSE");
                 });
             });
         }
