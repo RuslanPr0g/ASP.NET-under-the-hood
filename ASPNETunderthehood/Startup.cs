@@ -42,6 +42,8 @@ namespace ASPNETunderthehood
 
             app.UseToken(token);
 
+            app.UseErrorHandling();
+
             app.UseAuthentication();
 
             app.UseRoutingMiddleware();
