@@ -28,10 +28,10 @@ namespace ASPNETunderthehood.Middlewares
             }
             else if (path == "/index.html")
             {
-                // give html file
+                await _next.Invoke(context);
             }
             else
-                    {
+            {
                 context.Response.StatusCode = 404;
             }
         }
