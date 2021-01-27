@@ -50,6 +50,8 @@ namespace ASPNETunderthehood
 
             app.UseRouting();
 
+            //app.UseDefaultFiles(); // also goood
+
             app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
