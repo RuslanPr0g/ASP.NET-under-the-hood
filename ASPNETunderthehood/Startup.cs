@@ -46,6 +46,8 @@ namespace ASPNETunderthehood
 
             app.UseErrorHandling();
 
+            //app.UseStatusCodePages();
+
             app.UseAuthentication();
 
             app.UseDefaultFiles(UseDefaultFile("hello.html"));

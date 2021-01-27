@@ -26,6 +26,10 @@ namespace ASPNETunderthehood.Middlewares
             {
                 await context.Response.WriteAsync("Not Found page.");
             }
+            else if (context.Response.StatusCode == 500)
+            {
+                await context.Response.WriteAsync("Sorry our service is feeling bad.");
+            }
         }
     }
 }
