@@ -46,10 +46,8 @@ namespace ASPNETunderthehood
 
             app.UseAuthentication();
 
-            //DefaultFilesOptions options = new DefaultFilesOptions();
-            //options.DefaultFileNames.Clear();
-            //options.DefaultFileNames.Add("hello.html"); 
-            //app.UseDefaultFiles(options);
+            
+            app.UseDefaultFiles(UsetDefaultFile("hello.html"));
 
             app.UseDefaultFiles();
 
@@ -64,6 +62,14 @@ namespace ASPNETunderthehood
                     await context.Response.WriteAsync("THIS DOES NOT MAKE SENSE");
                 });
             });
+        }
+
+        private DefaultFilesOptions UsetDefaultFile(string file)
+        {
+            DefaultFilesOptions options = new DefaultFilesOptions();
+            options.DefaultFileNames.Clear();
+            options.DefaultFileNames.Add(file);
+            return options;
         }
     }
 }
