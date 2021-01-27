@@ -46,11 +46,14 @@ namespace ASPNETunderthehood
 
             app.UseAuthentication();
 
-            app.UseRoutingMiddleware();
+            //DefaultFilesOptions options = new DefaultFilesOptions();
+            //options.DefaultFileNames.Clear();
+            //options.DefaultFileNames.Add("hello.html"); 
+            //app.UseDefaultFiles(options);
+
+            app.UseDefaultFiles();
 
             app.UseRouting();
-
-            //app.UseDefaultFiles(); // also goood
 
             app.UseStaticFiles();
 
