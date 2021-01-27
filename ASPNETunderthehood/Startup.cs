@@ -40,31 +40,25 @@ namespace ASPNETunderthehood
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseToken(token);
+            //app.UseToken(token);
 
             app.UseErrorHandling();
 
             app.UseAuthentication();
 
-            
-            app.UseDefaultFiles(UsetDefaultFile("hello.html"));
+            app.UseDefaultFiles(UseDefaultFile("hello.html"));
 
-            app.UseDefaultFiles();
-
-            app.UseRouting();
+            app.UseDirectoryBrowser();
 
             app.UseStaticFiles();
 
-            app.UseEndpoints(endpoints =>
+            app.Run(async (context) =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("THIS DOES NOT MAKE SENSE");
-                });
+                await context.Response.WriteAsync("Hello World");
             });
         }
 
-        private DefaultFilesOptions UsetDefaultFile(string file)
+        private DefaultFilesOptions UseDefaultFile(string file)
         {
             DefaultFilesOptions options = new DefaultFilesOptions();
             options.DefaultFileNames.Clear();
