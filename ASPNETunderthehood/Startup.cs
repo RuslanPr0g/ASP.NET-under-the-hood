@@ -39,8 +39,10 @@ namespace ASPNETunderthehood
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            //app.UseToken(token);
+            else
+            {
+                app.UseToken(token);
+            }
 
             app.UseErrorHandling();
 
