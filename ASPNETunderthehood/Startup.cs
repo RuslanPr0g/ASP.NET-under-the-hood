@@ -16,6 +16,8 @@ namespace ASPNETunderthehood
     {
         string token;
 
+        DefaultFilesOptions options = new DefaultFilesOptions();
+
         public IConfiguration Configuration { get; private set; }
 
         public Startup(IConfiguration configuration)
@@ -46,7 +48,12 @@ namespace ASPNETunderthehood
 
             app.UseErrorHandling();
 
-            //app.UseStatusCodePages();
+            app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
+
+            app.Map("/error", ap => ap.Run(async context =>
+            {
+                await context.Response.WriteAsync($"Err: {context.Request.Query["code"]}");
+            }));
 
             app.UseAuthentication();
 
@@ -64,7 +71,6 @@ namespace ASPNETunderthehood
 
         private DefaultFilesOptions UseDefaultFile(string file)
         {
-            DefaultFilesOptions options = new DefaultFilesOptions();
             options.DefaultFileNames.Clear();
             options.DefaultFileNames.Add(file);
             return options;
