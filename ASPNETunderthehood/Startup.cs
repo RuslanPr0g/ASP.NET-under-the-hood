@@ -32,6 +32,12 @@ namespace ASPNETunderthehood
                 throw new ArgumentNullException(nameof(services));
             }
 
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+                options.HttpsPort = 44326;
+            });
+
             token = Configuration.GetValue<string>("Token");
         }
 
@@ -62,6 +68,8 @@ namespace ASPNETunderthehood
             app.UseDirectoryBrowser();
 
             app.UseStaticFiles();
+
+            app.UseHttpsRedirection();
 
             app.Run(async (context) =>
             {
