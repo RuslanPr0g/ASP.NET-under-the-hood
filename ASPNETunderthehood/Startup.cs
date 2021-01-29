@@ -50,6 +50,7 @@ namespace ASPNETunderthehood
             else
             {
                 app.UseToken(token);
+                app.UseHsts();
             }
 
             app.UseErrorHandling();
