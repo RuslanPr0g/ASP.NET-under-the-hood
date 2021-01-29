@@ -32,6 +32,15 @@ namespace ASPNETunderthehood
                 throw new ArgumentNullException(nameof(services));
             }
 
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(60);
+                options.ExcludedHosts.Add("us.example.com");
+                options.ExcludedHosts.Add("www.example.com");
+            });
+
             services.AddHttpsRedirection(options =>
             {
                 options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
