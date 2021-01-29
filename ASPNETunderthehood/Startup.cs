@@ -1,4 +1,4 @@
-using ASPNETunderthehood.Extentions;
+﻿using ASPNETunderthehood.Extentions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ASPNETunderthehood
@@ -17,6 +18,7 @@ namespace ASPNETunderthehood
         string token;
 
         DefaultFilesOptions options = new DefaultFilesOptions();
+        private IServiceCollection _services;
 
         public IConfiguration Configuration { get; private set; }
 
@@ -48,6 +50,8 @@ namespace ASPNETunderthehood
             });
 
             token = Configuration.GetValue<string>("Token");
+
+            _services = services;
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -81,9 +85,28 @@ namespace ASPNETunderthehood
 
             app.UseHttpsRedirection();
 
-            app.Run(async (context) =>
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Hello World");
+            //});
+
+            app.Run(async context =>
             {
-                await context.Response.WriteAsync("Hello World");
+                var sb = new StringBuilder();
+                sb.Append("<h1>Servises</h1>");
+                sb.Append("<table>");
+                sb.Append("<tr><th>Тип</th><th>Lifetime</th><th>Realization</th></tr>");
+                foreach (var svc in _services)
+                {
+                    sb.Append("<tr>");
+                    sb.Append($"<td>{svc.ServiceType.FullName}</td>");
+                    sb.Append($"<td>{svc.Lifetime}</td>");
+                    sb.Append($"<td>{svc.ImplementationType?.FullName}</td>");
+                    sb.Append("</tr>");
+                }
+                sb.Append("</table>");
+                context.Response.ContentType = "text/html;charset=utf-8";
+                await context.Response.WriteAsync(sb.ToString());
             });
         }
 
