@@ -95,12 +95,12 @@ namespace ASPNETunderthehood
                 var sb = new StringBuilder();
                 sb.Append("<h1>Servises</h1>");
                 sb.Append("<table>");
-                sb.Append("<tr><th>Тип</th><th>Lifetime</th><th>Realization</th></tr>");
+                sb.Append("<tr><th>Type</th><th>Lifetime</th><th>Realization</th></tr>");
                 foreach (var svc in _services)
                 {
                     sb.Append("<tr>");
                     sb.Append($"<td>{svc.ServiceType.FullName}</td>");
-                    sb.Append($"<td>{svc.Lifetime}</td>");
+                    sb.Append($"<td>{svc.Lifetime}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
                     sb.Append($"<td>{svc.ImplementationType?.FullName}</td>");
                     sb.Append("</tr>");
                 }
