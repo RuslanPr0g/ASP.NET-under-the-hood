@@ -1,4 +1,5 @@
 ﻿using ASPNETunderthehood.Extentions;
+using ASPNETunderthehood.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -48,12 +49,14 @@ namespace ASPNETunderthehood
                 options.HttpsPort = 44326;
             });
 
+            services.AddTransient<IMessageSender, EmailMessageSender>();
+
             token = Configuration.GetValue<string>("Token");
 
             _services = services;
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMessageSender messageSender)
         {
             if (env.IsDevelopment())
             {
@@ -84,29 +87,29 @@ namespace ASPNETunderthehood
 
             app.UseHttpsRedirection();
 
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Hello World");
-            //});
-
-            app.Run(async context =>
+            app.Run(async (context) =>
             {
-                var sb = new StringBuilder();
-                sb.Append("<h1>Servises</h1>");
-                sb.Append("<table>");
-                sb.Append("<tr><th>Type</th><th>Lifetime</th><th>Realization</th></tr>");
-                foreach (var svc in _services)
-                {
-                    sb.Append("<tr>");
-                    sb.Append($"<td>{svc.ServiceType.FullName}</td>");
-                    sb.Append($"<td>{svc.Lifetime}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-                    sb.Append($"<td>{svc.ImplementationType?.FullName}</td>");
-                    sb.Append("</tr>");
-                }
-                sb.Append("</table>");
-                context.Response.ContentType = "text/html;charset=utf-8";
-                await context.Response.WriteAsync(sb.ToString());
+                await context.Response.WriteAsync(messageSender.Send());
             });
+
+            //app.Run(async context =>
+            //{
+            //    var sb = new StringBuilder();
+            //    sb.Append("<h1>Servises</h1>");
+            //    sb.Append("<table>");
+            //    sb.Append("<tr><th>Type</th><th>Lifetime</th><th>Realization</th></tr>");
+            //    foreach (var svc in _services)
+            //    {
+            //        sb.Append("<tr>");
+            //        sb.Append($"<td>{svc.ServiceType.FullName}</td>");
+            //        sb.Append($"<td>{svc.Lifetime}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+            //        sb.Append($"<td>{svc.ImplementationType?.FullName}</td>");
+            //        sb.Append("</tr>");
+            //    }
+            //    sb.Append("</table>");
+            //    context.Response.ContentType = "text/html;charset=utf-8";
+            //    await context.Response.WriteAsync(sb.ToString());
+            //});
         }
 
         private DefaultFilesOptions UseDefaultFile(string file)
