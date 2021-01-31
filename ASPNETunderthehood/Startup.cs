@@ -49,7 +49,7 @@ namespace ASPNETunderthehood
                 options.HttpsPort = 44326;
             });
 
-            services.AddTransient<IMessageSender, EmailMessageSender>();
+            services.AddTransient<IMessageSender, SmsMessageSender>();
 
             token = Configuration.GetValue<string>("Token");
 
@@ -79,11 +79,11 @@ namespace ASPNETunderthehood
 
             app.UseAuthentication();
 
-            app.UseDefaultFiles(UseDefaultFile("hello.html"));
+            //app.UseDefaultFiles(UseDefaultFile("hello.html"));
 
-            app.UseDirectoryBrowser();
+            //app.UseDirectoryBrowser();
 
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
