@@ -16,8 +16,7 @@ namespace ASPNETunderthehood
     public class Startup
     {
         string token;
-
-        DefaultFilesOptions options = new DefaultFilesOptions();
+        readonly DefaultFilesOptions options = new DefaultFilesOptions();
         private IServiceCollection _services;
 
         public IConfiguration Configuration { get; private set; }
