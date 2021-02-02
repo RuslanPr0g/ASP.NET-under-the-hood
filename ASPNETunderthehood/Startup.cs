@@ -87,10 +87,12 @@ namespace ASPNETunderthehood
 
             app.UseHttpsRedirection();
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync(messageSender.Send());
-            });
+            app.UseMessage();
+
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync(messageSender.Send());
+            //});
 
             //app.Run(async context =>
             //{
