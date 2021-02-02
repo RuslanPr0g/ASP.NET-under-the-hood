@@ -39,8 +39,8 @@ namespace ASPNETunderthehood
                 options.Preload = true;
                 options.IncludeSubDomains = true;
                 options.MaxAge = TimeSpan.FromDays(60);
-                options.ExcludedHosts.Add("us.example.com");
-                options.ExcludedHosts.Add("www.example.com");
+                options.ExcludedHosts.Add("us.poggers.com");
+                options.ExcludedHosts.Add("www.pogchamp.com");
             });
 
             services.AddHttpsRedirection(options =>
@@ -49,13 +49,15 @@ namespace ASPNETunderthehood
                 options.HttpsPort = 44326;
             });
 
-            services.AddTransient<IMessageSender>(provider => {
+            services.AddTransient<IMessageSender>(provider =>
+            {
 
                 if (DateTime.Now.Hour >= 12) return new EmailMessageSender();
                 else return new SmsMessageSender();
             });
 
-            services.AddTransient<ICounter>(provider => {
+            services.AddTransient<ICounter>(provider =>
+            {
                 var counter = provider.GetService<RandomCounter>();
                 return counter;
             });
