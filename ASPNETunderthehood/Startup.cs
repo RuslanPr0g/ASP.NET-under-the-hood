@@ -51,7 +51,10 @@ namespace ASPNETunderthehood
 
             services.AddTransient<IMessageSender, EmailMessageSender>();
 
-            services.AddTransient<ICounter, RandomCounter>();
+            services.AddTransient<ICounter>(provider => {
+                var counter = provider.GetService<RandomCounter>();
+                return counter;
+            });
 
             services.AddTransient<CounterService>();
 
@@ -85,7 +88,7 @@ namespace ASPNETunderthehood
 
             //app.UseDefaultFiles(UseDefaultFile("hello.html"));
 
-            app.UseDirectoryBrowser();
+            //app.UseDirectoryBrowser();
 
             //app.UseStaticFiles();
 
