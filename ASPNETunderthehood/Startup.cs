@@ -51,6 +51,10 @@ namespace ASPNETunderthehood
 
             services.AddTransient<IMessageSender, EmailMessageSender>();
 
+            services.AddTransient<ICounter, RandomCounter>();
+
+            services.AddTransient<CounterService>();
+
             token = Configuration.GetValue<string>("Token");
 
             _services = services;

@@ -21,7 +21,7 @@ namespace ASPNETunderthehood.Middlewares
         {
             countRequests++;
             httpContext.Response.ContentType = "text/html;charset=utf-8";
-            await httpContext.Response.WriteAsync($"Запрос {countRequests}; Counter: {counter.Value}; Service: {counterService.Counter.Value}");
+            await httpContext.Response.WriteAsync($"Request {countRequests}; Counter: {counter.Value}; Service: {counterService.Counter.Value}");
         }
     }
 }
