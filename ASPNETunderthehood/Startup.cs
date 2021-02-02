@@ -49,7 +49,11 @@ namespace ASPNETunderthehood
                 options.HttpsPort = 44326;
             });
 
-            services.AddTransient<IMessageSender, EmailMessageSender>();
+            services.AddTransient<IMessageSender>(provider => {
+
+                if (DateTime.Now.Hour >= 12) return new EmailMessageSender();
+                else return new SmsMessageSender();
+            });
 
             services.AddTransient<ICounter>(provider => {
                 var counter = provider.GetService<RandomCounter>();
