@@ -83,20 +83,15 @@ namespace ASPNETunderthehood
 
             app.UseAuthentication();
 
-            app.UseDefaultFiles(UseDefaultFile("hello.html"));
+            //app.UseDefaultFiles(UseDefaultFile("hello.html"));
 
             app.UseDirectoryBrowser();
 
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
-            app.UseMessage();
-
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync(messageSender.Send());
-            //});
+            app.UseCounter();
 
             //app.Run(async context =>
             //{
