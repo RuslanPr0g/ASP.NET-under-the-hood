@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,7 +70,7 @@ namespace ASPNETunderthehood
             _services = services;
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMessageSender messageSender)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMessageSender messageSender, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
@@ -92,34 +93,22 @@ namespace ASPNETunderthehood
 
             app.UseAuthentication();
 
-            //app.UseDefaultFiles(UseDefaultFile("hello.html"));
+            app.UseDefaultFiles(UseDefaultFile("hello.html"));
 
-            //app.UseDirectoryBrowser();
+            app.UseDirectoryBrowser();
 
-            //app.UseStaticFiles();
+            app.UseStaticFiles();
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseCounter();
 
-            //app.Run(async context =>
-            //{
-            //    var sb = new StringBuilder();
-            //    sb.Append("<h1>Servises</h1>");
-            //    sb.Append("<table>");
-            //    sb.Append("<tr><th>Type</th><th>Lifetime</th><th>Realization</th></tr>");
-            //    foreach (var svc in _services)
-            //    {
-            //        sb.Append("<tr>");
-            //        sb.Append($"<td>{svc.ServiceType.FullName}</td>");
-            //        sb.Append($"<td>{svc.Lifetime}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-            //        sb.Append($"<td>{svc.ImplementationType?.FullName}</td>");
-            //        sb.Append("</tr>");
-            //    }
-            //    sb.Append("</table>");
-            //    context.Response.ContentType = "text/html;charset=utf-8";
-            //    await context.Response.WriteAsync(sb.ToString());
-            //});
+            app.Run(async (context) =>
+            {
+                logger.LogInformation("Processing request {0}", context.Request.Path);
+
+                await context.Response.WriteAsync("Hello World!");
+            });
         }
 
         private DefaultFilesOptions UseDefaultFile(string file)
