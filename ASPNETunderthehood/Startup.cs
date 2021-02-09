@@ -91,8 +91,6 @@ namespace ASPNETunderthehood
                 await context.Response.WriteAsync($"Err: {context.Request.Query["code"]}");
             }));
 
-            app.UseAuthentication();
-
             app.UseDefaultFiles(UseDefaultFile("hello.html"));
 
             app.UseDirectoryBrowser();
@@ -100,8 +98,6 @@ namespace ASPNETunderthehood
             app.UseStaticFiles();
 
             app.UseHttpsRedirection();
-
-            app.UseCounter();
 
             app.Run(async (context) =>
             {
