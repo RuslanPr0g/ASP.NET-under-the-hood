@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Debug;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -104,6 +105,9 @@ namespace ASPNETunderthehood
             var loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder.AddConsole();
+                builder.AddConsole();
+                builder.AddFilter("System", LogLevel.Debug)
+                    .AddFilter<DebugLoggerProvider>("Microsoft", LogLevel.Trace);
             });
 
             ILogger logger = loggerFactory.CreateLogger<Startup>();
