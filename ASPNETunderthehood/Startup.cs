@@ -70,7 +70,7 @@ namespace ASPNETunderthehood
             _services = services;
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMessageSender messageSender, ILogger<Startup> logger)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMessageSender messageSender)
         {
             if (env.IsDevelopment())
             {
@@ -99,10 +99,18 @@ namespace ASPNETunderthehood
 
             app.UseHttpsRedirection();
 
+            // create logger using logger factory
+
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder.AddConsole();
+            });
+
+            ILogger logger = loggerFactory.CreateLogger<Startup>();
+
             app.Run(async (context) =>
             {
-                logger.LogInformation("Processing request {0}", context.Request.Path);
-
+                logger.LogInformation("Requested Path: {0}", context.Request.Path);
                 await context.Response.WriteAsync("Hello World!");
             });
         }
