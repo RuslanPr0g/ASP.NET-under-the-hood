@@ -112,7 +112,7 @@ namespace ASPNETunderthehood
                 await context.Response.WriteAsync($"Err: {context.Request.Query["code"]}");
             }));
 
-            app.UseDirectoryBrowser();
+            //app.UseDirectoryBrowser();
 
             app.UseStaticFiles();
 
