@@ -3,6 +3,7 @@ using ASPNETunderthehood.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -83,6 +84,25 @@ namespace ASPNETunderthehood
                 app.UseHsts();
             }
 
+            var routeBuilder = new RouteBuilder(app);
+
+            routeBuilder.MapRoute("{controller}/{action}",
+                async context => {
+                    context.Response.ContentType = "text/html; charset=utf-8";
+                    await context.Response.WriteAsync("bisegmental request");
+                });
+
+
+            routeBuilder.MapRoute("{controller}/{action}/{id}",
+                async context => {
+                    context.Response.ContentType = "text/html; charset=utf-8";
+                    await context.Response.WriteAsync("trisegmental request");
+                });
+
+            app.UseRouter(routeBuilder.Build());
+
+            // ***
+
             app.UseErrorHandling();
 
             app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
@@ -92,15 +112,13 @@ namespace ASPNETunderthehood
                 await context.Response.WriteAsync($"Err: {context.Request.Query["code"]}");
             }));
 
-            app.UseDefaultFiles(UseDefaultFile("hello.html"));
-
             app.UseDirectoryBrowser();
 
             app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
-            // create logger using logger factory
+            // create logger using logger factory ***
 
             var loggerFactory = LoggerFactory.Create(builder =>
             {
@@ -117,13 +135,6 @@ namespace ASPNETunderthehood
                 logger.LogInformation("Requested Path: {0}", context.Request.Path);
                 await context.Response.WriteAsync("Hello World!");
             });
-        }
-
-        private DefaultFilesOptions UseDefaultFile(string file)
-        {
-            options.DefaultFileNames.Clear();
-            options.DefaultFileNames.Add(file);
-            return options;
         }
     }
 }
